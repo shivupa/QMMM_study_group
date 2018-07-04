@@ -1,0 +1,16 @@
+name: qmmm
+channels:
+    - psi4/label/dev
+    - psi4
+dependencies:
+    - python=3.6
+    - numpy
+    - scipy
+    - matplotlib
+    - pandas
+    - sympy
+    - IPython
+    - jupyter
+    - pip
+    - psi4
+    - cmake
