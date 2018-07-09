@@ -2,7 +2,7 @@ name: qmmm
 channels:
     - psi4/label/dev
     - psi4
-    - pyscf
+    - anaconda
 dependencies:
     - python=3.6
     - numpy
@@ -16,3 +16,4 @@ dependencies:
         - pyscf
     - psi4
     - cmake
+    - cython
