@@ -105,3 +105,6 @@ venv.bak/
 
 # OS generated files
 .DS_Store
+
+#psi4numpy timer for jobs
+timer.dat
