@@ -12,7 +12,7 @@ dependencies:
     - sympy
     - IPython
     - jupyter
-    - pip
+    - pip:
+        - pyscf
     - psi4
     - cmake
-    - pyscf
