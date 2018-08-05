@@ -1,5 +1,0 @@
-numpy==1.14.2
-IPython==6.3.1
-matplotlib==2.2.2
-sympy==1.1.1
-scipy==1.0.1

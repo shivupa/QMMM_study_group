@@ -15,5 +15,7 @@ dependencies:
     - cython
     - pip:
         - pyscf
+        - autopep8
+        - jupyter_contrib_nbextensions
     - psi4
     - cmake
