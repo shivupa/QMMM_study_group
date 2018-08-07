@@ -6,7 +6,6 @@
 Set up instructions and a list of useful references can be found in the [Wiki](https://github.com/shivupa/QMMM_study_group/wiki)!
 
 Try our notebooks without setting anything up by clicking on the Binder badge!  
-Note: Current errors with importing Psi4 but PySCF notebooks are unaffected
 
 ## Contact information
  - Amanda Dumi: aed63@pitt.edu
