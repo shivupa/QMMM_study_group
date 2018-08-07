@@ -1,6 +1,5 @@
 name: qmmm
 channels:
-    - psi4/label/dev
     - psi4
     - anaconda
 dependencies:
