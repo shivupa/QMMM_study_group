@@ -12,9 +12,11 @@ dependencies:
     - IPython
     - jupyter
     - cython
+    - scikit-learn
     - pip:
         - pyscf
         - autopep8
         - jupyter_contrib_nbextensions
+        - scikit-optimize
     - psi4
     - cmake
