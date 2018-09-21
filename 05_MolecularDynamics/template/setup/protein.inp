@@ -1,0 +1,12 @@
+--- pdbname
+    protein.pdb
+--- protein/nucleic flex/rigd   coarse/fine  rhydro1   rhydro2(used for C-alpha with hybrid model)
+    protein         flex        coarse          5.300     5.300
+--- num_first_type  skip_first  skip_last
+    1               no          no 
+--- charge/nocharge  pH     disulfides
+    nocharge         7.1      no 
+--- i_use_go/no i_skip_go_on_loops  epsilon  go-dist-cutoff i_use_12_10
+    yes         no                  0.600    5.500             1
+--- edihed1_ca - edihed3_ca - edihed1_sc - edihed3_sc - kbond - kangle - i_do_impropers 
+    0.500        0.250        0.410        0.210        20.0    10.0        no

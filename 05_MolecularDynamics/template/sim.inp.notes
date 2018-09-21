@@ -1,0 +1,239 @@
+This file describes the parameters that one may specify in the simulation
+input ("sim.inp") file.
+--------------------------------------------------------------------------------
+
+dseed: At one point, this appears to have been used as the random seed for a
+  simulation.  As of versions 32-07-12 and 45-07-12, this no longer does 
+  anything.
+
+teprint: Time between writing energy information, in ps.
+
+ttprint: time between writing center-of-mass information, in ps.
+
+tmprint: time between writing out movie files (PDB format), in ps.
+
+num_lst_step: number of steps between updating the nonbonded list.
+ 
+num_fmd_step: number of steps between updating medium range forces (see vdw_med).
+
+num_hyd_step: number of steps between updating hydrodynamic forces
+
+num_bal_step: According to comments in uiowa_bd_openmp.32-07-12.f and 
+  uiowa_bd_openmp.45-07-12.f, this is the "number of steps required before 
+  update of hydrodynamics", just like num_hyd_step.  Inspection of the code 
+  suggests that it is actually the number of steps between balancing the 
+  computational load between multiple OMP processes.
+
+num_threads: The number of OMP threads to use. This appears to override OMP
+  environment variables.
+
+bond_dev_quit: If a bound length deviates from its equilibrium length by more 
+  than this amount (presumably, it is in angstroms), then the program will quit.
+  Set to a negative value to turn this off.
+
+i_continue_after_problem?: if 'yes', the program will continue to run even after
+  running into problems.
+
+f_typs: number of molecule types
+
+f_mols: number of molecules
+
+i_debug: if 'yes', write out extra information for debugging
+
+q_desired: terminate the simulation if the fraction of native contacts (Q) is 
+  at least this great.
+
+mol_to_watch: You should specify two integers (such as "1 1") here, but it is
+  not clear to me what this actually does.  
+
+rot: if "rot" begins this line, then the next 8 numbers are read and used as:
+  ivec1a
+  ivec1b
+  ivec2a
+  ivec2b
+  ivec3a
+  ivec3b
+  numcen1
+  numcen2
+  It is not clear what these numbers do.  Just leave these numbers as you found them.
+
+xmin, xmax, ymin, ymax, zmin, zmax: 
+  While the xmin, xmax, ymin, ymax, and zmin labels do not appear, the 6 numbers
+  on the line after "rot" are indeed these values.  This specifies the
+  dimensions of the system.  This appears to apply for periodic boundary conditions.
+
+i_pbc: Specifies whether periodic boundary conditions should be applied. If
+  periodic boundary conditions should be applied, this should be set to "1".
+
+i_look_for_crashes:  It is not clear what this does. Just keep it set to "no".
+
+periodic_bounds_okay: Again, it was not clear from the source code what this
+  does.  Keep it set to "no" to be safe.
+
+replica_exchange: "yes" if you want to do replica exchange, and "no" otherwise.
+  It appears that replica exchange needs to be performed with a "master bash 
+  script" that is mentioned in comments in the uiowa_bd source code, but I do
+  not think we have such a script.
+
+i_append_movie: Comment from source code: 
+  """
+  i_append_movie is used to determine whether we want to add to movies
+  rather than start again at zero - it looks for the movie with the
+  higher number and either starts there or adds one depending on the
+  value of i_append_movie
+  i_append_movie = 1 --> overwrite the last movie
+                 = 2 --> add to the list
+  """
+
+i_limit_verbosity: Comment from source code:
+  """
+  i_limit_verbosity limits how much is written out when we use the
+  arbitrary functions of our force field if 'yes' then don't write out
+  much
+  """
+
+i_use_12_10: 
+  1: 12-10 potential 
+  2: 12-06 potential
+  3: 08-04 potential
+  Note that this corresponds to the variable "i_use_v_typ" in the source code.
+
+uniform_moves: Comment from the uiowa_bd source code:
+  02-08-07 implement a uniform random step move                                                       
+  determine max distance that any one protein can move in one timestep                                
+  note that this only works for r ms at the moment - and doesn't
+  deal with their rotations either yet 
+ 
+steepest_descent: Doesn't do anything. Ostensibly setting this to "yes" would 
+  make the program do steepest descent minimization, but there isn't actually  
+  code to do so.
+
+r_temperature: The temperature, in Kelvin.
+
+r_ionic_strength: The ionic strength. Presumably units of "molar".
+
+r_ion:  Set this to 0.0, or the program will not run.
+
+r_dielectric: The dielectric constant (relative permittivity).
+
+r_pH: This is only used if "i_do_protease" is set to true, in which case it is
+  used in calculating the charge of the carboxy terminus of the new peptide.
+
+r_viscosity: The viscosity in units of mPa*s, also known as cP
+
+r_fconst: A force constant for some sort of short range harmonic potential. It
+  is not clear to me what this applies to.
+
+parameter file name: specify the name of the parameter file with information on
+  the "epsilon" for repulsive terms.
+
+no_elec: "no" if you want electrostatics, "yes" if you do not want electrostatics.
+
+wrap_molecules: Specify how molecules are wrapped in movie files.
+  0: do not wrap in movie files
+  1: Wrap atoms in movie files
+  2: wrap molecules in movie files
+
+i_use_hydro: "yes" to use hydrodynamic interactions, otherwise "no".
+
+full/diag:  Specify the type of hydrodynamics to use.
+  Options include:
+  no: none
+  full: full
+  tree: tree
+  diag: diagonal
+  geye: geyer
+  mult: multi
+  intr: intra
+
+integer/real:  Valid options appear to be "integer" and "cutoff".  This appears
+  to relate to the hydrodynamic calculations.
+
+scale_nb: Not clear what this does, but it appears to relate to the hydrodynamic
+  calculations.
+
+BD/LD: What type of dynamics to do.  The following are choices:
+  langevin
+  brownian
+  dpd: dissipative particle dynamics
+
+r_temp: Comment from uiowa_bd code:
+  """
+  mass of individual subunits or radius of
+  molecules if using multi_hydrodynamics
+  """
+
+kcut: Does nothing.  The code for associated calculations is present but 
+  commented out.
+
+linker file: Not sure what this does.  Keep it set to "1".
+
+growrigd file: Name of file with information on growing rigid molecules.
+
+i_grow_rigds: Not sure what growing rigid molecules does, so keep this set to "no".
+
+go potentials file name: Name of file with Go parameters (usually something like
+  "protein.go.parameters").
+
+i_use_go_pairs: Set to "yes" to use Go potentials, otherwise no.
+
+i_use_exclusive_go: According to comments in the uiowa_bd code, this means:
+  "go-pairs are exclusive for mol pairs and domain types"
+  """
+  note that i_use_exclusive_go is used for cases where a molecule has
+  multiple modes of interaction with other molecules
+  """
+
+num_exc_stp: Number of steps between updating the list of exclusive go pairs.
+
+go_nonexclusive_file: Not sure how to use this.  Presumably this is the name of
+  a file where one can specify excepts to the "i_use_exclusive_go" rule.
+
+i_compare_go_with_others:  Not sure what this does.
+
+q_mode_threshold: Not sure what this does. It appears to relate to i_use_exclusive_go.
+
+reaction criteria file, i_do_reactions, nrequired:  ??
+
+no-force file, i_omit_some_forces: ??
+
+time_step_s, time_step_l: short and long time steps, respectively.  In my 
+  experience we keep these the same. Some interactions apparently can be updated
+  at longer time steps.
+
+totsimtime: The total simulation time, in ps.
+
+vdw_s: van der Waals interactions at this length (in Angstroms) or shorter count
+  as "short range" interactions
+
+vdw_m: van der Waals interactions less than this length (in Angstroms) and  
+  greater than vdw_s count as as "medium range" interactions
+
+go_s, go_m:  Same as vdw_s and vdw_m, except for Go interactions
+
+ele_s, ele_m: Same as vdw_s and vdw_m, except for electrostatic interactions
+
+ele_l ("junk"): distance cutoff for long range electrostatics
+
+cut_h (the second "junk"): distance cutoff for hydrodynamic interactions
+
+ff_cell: ??
+
+harmonicfile, i_do_harmonic, num_harm: defunct.
+
+position restraint information: Not sure how to use this.
+
+wobble_file, etc: defunct.
+
+r_size, l_size, r_size_fac, n_size, f_size: Parameters for confinement potential.
+  Spherical potential:  Set "r_size" to the radius of the sphere in angstroms.
+    Set "l_size" to a negative number.
+  Cylindrical potential: Set "r_size" to the radius of the cylinder in angstroms,
+    and set "l_size" to the height of the cylinder in angstroms.
+
+  r_size_fac: the factor by which r_size is first scaled. 
+  n_size: appears to be used with shrinking boxes.
+  f_size: a force constant for the confinement potential
+
+
+We do not use any of the parameters found lower in the file.
