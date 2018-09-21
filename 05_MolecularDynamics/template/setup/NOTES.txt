@@ -1,0 +1,46 @@
+This file contains information on setting up the simulation directory.
+
+--------------------------------------------------------------------------------
+All that needs to be done is to run the script "run_prep.sh" from this 
+directory. Before running this script, the following was already done: 
+
+   Prepare an input file for the preparation program (uiowa_goprep.16-06-12.exe)
+
+   The input file is:
+     2b3p.inp
+   Most of the parameters are straightforward, but here are some important points:
+     - rhydro1: For the C-alpha models, this should be set to 5.3 angstroms. For
+       the side-chain model, this should be set to 3.5 angstroms. See Adrian 
+       Elcock's paper: dio:10.1021/ct800499p. This reproduces translational and
+       rotational diffusion coefficients for a variety of proteins, as compared
+       to the program Hydropro. 
+
+   num_first_type: specifies the molecule number.
+
+   pH:  I believe this is only used in determining charges.
+
+   Set the go distance cutoff to 5.5 angstroms.  This means that any pair of
+     residues with atoms that are closer than 5.5 angstroms counts as a go
+     pair (native contact).
+
+   epsilon, edihed1_ca, and edihed2_ca: These are the well depth for the
+     favorable Go-potential that applies to native contacts (the 12-10 potential),
+     and the "V1" and "V3" pseudo-dihedral barrier heights.  These terms can vary,
+     but should stay in the ratio of 12:10:5 for c-alpha models, and 25:41:21 for 
+     side-chain models.  These sets of parameters were used in Dr. Elcock's paper,
+     "Striking effects of diffusion...".
+
+   coarse/fine:  Here we use the coarse model, which includes one "bead" at the 
+     c-alpha position of each residue.
+
+   edihed1_sc and edihed2_sc are for the side chain model, which we are not using.
+
+   kbond and kangle: force constants for bond and angle terms.  These are usually
+     set to 20 kcal/angstrom/mol and 10 kcal/radian/mol, respectively.
+
+--------------------------------------------------------------------------------
+Here is some information on what the script "run_prep.sh" does:
+
+1. Download the PDB file from www.rcsb.org.  We use PDB code 2b3p.
+
+2. Run the prep program, and rename the files.  
