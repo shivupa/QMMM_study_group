@@ -1,0 +1,73 @@
+\documentclass{beamer}
+\usetheme{metropolis}
+\usepackage{braket}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows,chains,matrix,positioning,scopes}
+\usepackage[style=chem-acs]{biblatex}
+\addbibresource{fciqmc_groupmtg.bib}
+\setbeamerfont{footnote}{size=\tiny}
+\usepackage{animate}
+
+\newrobustcmd*{\footfullcitenm}{%
+  \AtNextCite{%
+    \let\thefootnote\relax
+    \let\mkbibfootnote\mkbibfootnotetext}%
+  \footfullcite}
+
+\definecolor{hotdog}{HTML}{e5bc14}
+
+\title{Beyond LCAO-MO}
+% \subtitle{Group meeting presentation}
+\author{Amanda Dumi}
+\date{\today}
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}[t]{Plane Waves}
+\begin{itemize}
+  \item useful for periodic materials
+  \item but first a bit on Fourier transform
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Bloch's theorem}
+  potential experienced is periodic
+  $$ V(r)\ =\ V(r + R)$$
+  we can then expand our basis with a \alert<2>{periodic function}
+  $$\psi(r)\ =\ e^{ikr}\alert<2>{f(r)}$$
+  $$f(r)\ =\ \sum\limits_G c_i e^{iGr}$$
+  $$ c_i = (\frac{\hbar^2}{2m}) \left| k+G\right|^2$$
+  We can include infinite waves within the cell, but the ones with less kinetic energy are more important, so a cut-off energy is set, $G_{max}$.
+\end{frame}
+\begin{frame}
+  \begin{figure}
+  \centering
+  \animategraphics[loop,autoplay,width = 0.9\textwidth]{12}{fouriertransform-}{0}{92}
+\end{figure}
+NEED REFERENCE.
+\end{frame}
+\begin{frame}{Grid-based}
+
+\end{frame}
+
+\begin{frame}{Other basis sets}
+Here are a list of other basis sets used that I don't know enough about to explain
+\begin{itemize}
+  \item wavelets
+  \item real-space
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Codes}
+  \begin{itemize}
+    \item Pisces: grid-based
+    \item Crystal, VASP: Gaussian basis function DFT
+    \item Quantum Espresso: plane waves
+  \end{itemize}
+\end{frame}
+
+\end{document}
